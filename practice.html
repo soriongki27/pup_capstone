@@ -41,55 +41,49 @@
         }
         .heart {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 15px;
+            height: 15px;
             background-color: red;
             transform: rotate(45deg);
-            animation: floatHeart 5s linear infinite;
+            opacity: 1;
+            animation: fall linear infinite;
         }
         .heart:before,
         .heart:after {
             content: '';
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 15px;
+            height: 15px;
             background-color: red;
             border-radius: 50%;
         }
         .heart:before {
-            top: -5px;
+            top: -7px;
             left: 0;
         }
         .heart:after {
-            left: 5px;
+            left: 7px;
             top: 0;
         }
-        @keyframes floatHeart {
-            0% {
-                transform: translateY(0) rotate(45deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-200px) rotate(45deg);
-                opacity: 0;
-            }
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <script>
-        function createHeart() {
+        function createFallingHeart() {
             const heart = document.createElement('div');
             heart.className = 'heart';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+            heart.style.left = `${Math.random() * window.innerWidth}px`;
+            heart.style.animationDuration = `${2 + Math.random() * 3}s`;
             document.body.appendChild(heart);
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
+            setTimeout(() => heart.remove(), 5000);
         }
-        setInterval(createHeart, 200);
+        
+        setInterval(createFallingHeart, 200);
     </script>
     <div class="container">
         <h1>Edison</h1>
